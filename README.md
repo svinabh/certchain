@@ -17,8 +17,8 @@ python3 -m venv .venv
 .venv/bin/python -m certchain.forged_cert_demo  # Phase 2: forged certificate rejected
 .venv/bin/python -m certchain.network_demo      # Phase 3: 3-node P2P sync + consensus
 
-# ya ek node manually chalao:
-.venv/bin/python -m certchain.run_node --port 5000
+# ya ek node manually chalao (port 8000+ — macOS pe 5000 AirPlay Receiver ka hai):
+.venv/bin/python -m certchain.run_node --port 8000
 
 # run the tests
 .venv/bin/python -m pytest certchain/tests -v

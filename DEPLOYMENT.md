@@ -61,10 +61,10 @@ Blockchain deploy = normal website deploy se ALAG. Ye cheezein deploy hoti hain:
 ### Tareeka A: Laptop + Cloudflare Tunnel (sabse fast public demo)
 
 ```bash
-# 1. Apni mini-chain ke 3 nodes chalao localhost pe
-python node.py --port 5000
-python node.py --port 5001 --peers localhost:5000
-python node.py --port 5002 --peers localhost:5000
+# 1. Apni mini-chain ke 3 nodes chalao localhost pe (port 8000+ — macOS pe 5000 AirPlay ka hai)
+.venv/bin/python -m certchain.run_node --port 8000
+.venv/bin/python -m certchain.run_node --port 8001 --peers localhost:8000
+.venv/bin/python -m certchain.run_node --port 8002 --peers localhost:8000
 
 # 2. Node 1 ko public banao (₹0, account bhi nahi chahiye)
 cloudflared tunnel --url http://localhost:5000
@@ -136,18 +136,18 @@ certchaind start
 services:
   node1:
     build: .
-    environment: [CHAIN_ID=certchain-1, PEERS=node2:5000,node3:5000]
-    ports: ["5000:5000"]
+    environment: [CHAIN_ID=certchain-1, PEERS=node2:8001,node3:8002]
+    ports: ["8000:8000"]
     volumes: ["chain1-data:/data"]
   node2:
     build: .
-    environment: [CHAIN_ID=certchain-1, PEERS=node1:5000,node3:5000]
-    ports: ["5001:5000"]
+    environment: [CHAIN_ID=certchain-1, PEERS=node1:8000,node3:8002]
+    ports: ["8001:8000"]
     volumes: ["chain2-data:/data"]
   node3:
     build: .
-    environment: [CHAIN_ID=certchain-1, PEERS=node1:5000,node2:5000]
-    ports: ["5002:5000"]
+    environment: [CHAIN_ID=certchain-1, PEERS=node1:8000,node2:8001]
+    ports: ["8002:8000"]
     volumes: ["chain3-data:/data"]
 volumes: { chain1-data: {}, chain2-data: {}, chain3-data: {} }
 ```

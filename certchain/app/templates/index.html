@@ -3,15 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CertChain</title>
+<title>CertChain — The Invisible Blockchain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+<div class="aurora a1"></div>
+<div class="aurora a2"></div>
+<div class="aurora a3"></div>
+
 <header>
-  <div>
-    <h1 data-i18n="appTitle">CertChain</h1>
-    <p class="subtitle" data-i18n="appSubtitle">Certificates on blockchain — invisible to users</p>
-  </div>
+  <a class="brand" href="/">
+    <svg width="38" height="38" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="40" y2="40">
+        <stop stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/>
+      </linearGradient></defs>
+      <rect x="3" y="3" width="34" height="34" rx="10" fill="url(#lg)"/>
+      <path d="M12.5 20.5l5.5 5.5 10-11" stroke="#070b18" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="brand-text">
+      <h1 data-i18n="appTitle">CertChain</h1>
+      <p data-i18n="appSubtitle">Certificates on blockchain — invisible to users</p>
+    </div>
+  </a>
+  <nav class="tabs" aria-label="Sections">
+    <button id="tab-issue" class="tab active">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span data-i18n="tabIssue">Issue</span>
+    </button>
+    <button id="tab-verify" class="tab">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5l5.5 2v4.2c0 3.1-2.2 5.6-5.5 6.8-3.3-1.2-5.5-3.7-5.5-6.8V3.5L8 1.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5.8 8l1.6 1.6L10.4 6.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span data-i18n="tabVerify">Verify</span>
+    </button>
+    <button id="tab-explorer" class="tab">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.5" y="1.5" width="5.4" height="5.4" rx="1.4" stroke="currentColor" stroke-width="1.5"/><rect x="9.1" y="1.5" width="5.4" height="5.4" rx="1.4" stroke="currentColor" stroke-width="1.5"/><rect x="1.5" y="9.1" width="5.4" height="5.4" rx="1.4" stroke="currentColor" stroke-width="1.5"/><rect x="9.1" y="9.1" width="5.4" height="5.4" rx="1.4" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span data-i18n="tabExplorer">Explorer</span>
+    </button>
+  </nav>
   <div class="lang-box">
     <label for="lang" data-i18n="langLabel">Language</label>
     <select id="lang">
@@ -25,40 +55,80 @@
   </div>
 </header>
 
-<nav>
-  <button id="tab-issue" class="tab active" data-i18n="tabIssue">Issue</button>
-  <button id="tab-verify" class="tab" data-i18n="tabVerify">Verify</button>
-  <button id="tab-explorer" class="tab" data-i18n="tabExplorer">Explorer</button>
-</nav>
-
 <main>
+  <section class="hero">
+    <h2 data-i18n="heroTitle">The Invisible Blockchain</h2>
+    <p data-i18n="heroSub">Certificates, secured by Ethereum. Paid in ₹. Verified free, forever.</p>
+    <div class="stats">
+      <div class="stat"><span id="stat-blocks">—</span><label data-i18n="statChain">Blocks</label></div>
+      <div class="stat"><span>₹5</span><label data-i18n="statFee">Issue fee</label></div>
+      <div class="stat"><span>₹0</span><label data-i18n="statVerify">Verification</label></div>
+      <div class="stat"><span>6</span><label data-i18n="statLangs">Languages</label></div>
+    </div>
+  </section>
+
   <section id="page-issue" class="page active">
     <div class="card">
-      <h2 data-i18n="issueTitle">Issue a Certificate</h2>
-      <p class="hint" data-i18n="feeInfo">Fee: ₹5 via UPI (demo) — the user never touches crypto</p>
+      <div class="card-head">
+        <h3 data-i18n="issueTitle">Issue a Certificate</h3>
+        <p class="hint" data-i18n="feeInfo">Fee: ₹5 via UPI (demo) — the user never touches crypto</p>
+      </div>
       <form id="issue-form">
-        <label data-i18n="accountId">UPI Account ID</label>
-        <input id="issue-account" placeholder="rahul@upi">
-        <label data-i18n="university">University</label>
-        <input id="issue-university" value="Demo University">
-        <label data-i18n="certId">Certificate ID</label>
-        <input id="issue-certid" placeholder="CERT-2026-0101">
-        <label data-i18n="holder">Holder Name</label>
-        <input id="issue-holder" placeholder="Rahul">
-        <label data-i18n="course">Course</label>
-        <input id="issue-course" placeholder="B.Tech CSE">
+        <div class="field">
+          <label data-i18n="accountId">UPI Account ID</label>
+          <input id="issue-account" placeholder="rahul@upi">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label data-i18n="university">University</label>
+            <input id="issue-university" value="Demo University">
+          </div>
+          <div class="field">
+            <label data-i18n="certId">Certificate ID</label>
+            <input id="issue-certid" placeholder="CERT-2026-0101">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label data-i18n="holder">Holder Name</label>
+            <input id="issue-holder" placeholder="Rahul">
+          </div>
+          <div class="field">
+            <label data-i18n="course">Course</label>
+            <input id="issue-course" placeholder="B.Tech CSE">
+          </div>
+        </div>
         <button type="submit" class="primary" data-i18n="issueBtn">Issue Certificate (₹5)</button>
       </form>
       <div id="issue-result" class="result hidden"></div>
     </div>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">✨</div>
+        <h4 data-i18n="feat1Title">Invisible by design</h4>
+        <p data-i18n="feat1Desc">No wallet, no seed phrase, no crypto jargon — just UPI.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🛡️</div>
+        <h4 data-i18n="feat2Title">Free forever verification</h4>
+        <p data-i18n="feat2Desc">Anyone can verify any certificate in one second. ₹0.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🌍</div>
+        <h4 data-i18n="feat3Title">Speaks your language</h4>
+        <p data-i18n="feat3Desc">6 languages at launch, extensible to every language on earth.</p>
+      </div>
+    </div>
   </section>
 
   <section id="page-verify" class="page">
-    <div class="card">
-      <h2 data-i18n="verifyTitle">Verify a Certificate</h2>
-      <p class="hint" data-i18n="freeInfo">100% free — anyone can verify, no account needed</p>
-      <form id="verify-form">
-        <label data-i18n="certId">Certificate ID</label>
+    <div class="card verify-card">
+      <div class="card-head">
+        <h3 data-i18n="verifyTitle">Verify a Certificate</h3>
+        <p class="hint" data-i18n="freeInfo">100% free — anyone can verify, no account needed</p>
+      </div>
+      <form id="verify-form" class="verify-inline">
         <input id="verify-input" data-i18n-ph="verifyPlaceholder" placeholder="CERT-2026-0100">
         <button type="submit" class="primary" data-i18n="verifyBtn">Verify (Free)</button>
       </form>
@@ -68,14 +138,19 @@
 
   <section id="page-explorer" class="page">
     <div class="card wide">
-      <h2 data-i18n="explorerTitle">Chain Explorer</h2>
-      <button id="explorer-refresh" data-i18n="refresh">Refresh</button>
+      <div class="card-head row">
+        <h3 data-i18n="explorerTitle">Chain Explorer</h3>
+        <button id="explorer-refresh" data-i18n="refresh">Refresh</button>
+      </div>
       <div id="blocks"></div>
     </div>
   </section>
 </main>
 
-<footer data-i18n="footer">CertChain — invisible blockchain demo</footer>
+<footer>
+  <span data-i18n="footer">CertChain — invisible blockchain demo</span>
+  <a href="https://github.com/svinabh/certchain" target="_blank" rel="noopener">GitHub ↗</a>
+</footer>
 <script>const LANGS = {{ langs_json | safe }};</script>
 <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>

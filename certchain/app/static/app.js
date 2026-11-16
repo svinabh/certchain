@@ -138,3 +138,13 @@ async function loadExplorer() {
 }
 
 document.getElementById("explorer-refresh").addEventListener("click", loadExplorer);
+
+/* ---- hero stats ---- */
+async function loadStats() {
+  try {
+    const body = await (await fetch("/api/blocks")).json();
+    const el = document.getElementById("stat-blocks");
+    if (el && typeof body.length === "number") el.textContent = body.length;
+  } catch (_) { /* node offline — stat stays "—" */ }
+}
+loadStats();

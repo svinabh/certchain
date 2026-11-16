@@ -104,6 +104,24 @@ def test_verify_found_and_missing(client):
     assert "nahi mila" in missing["reason"]
 
 
+def test_verify_handles_legacy_string_data_records(client, node_url, university):
+    """Phase 3 ke purane records ka data plain string tha (JSON nahi) —
+    verify ko 500 nahi dena chahiye, gracefully handle karna chahiye."""
+    legacy = SignedRecord(
+        record_type="ISSUE", cert_id="CERT-LEGACY-1",
+        data="Rahul, B.Tech CSE, 2026",  # plain string — NOT JSON
+        timestamp=time.time(), signer=university.address,
+    )
+    legacy.sign(university)
+    assert requests.post(f"{node_url}/transactions/new", json=legacy.to_dict(), timeout=5).status_code == 201
+    assert requests.post(f"{node_url}/mine", timeout=30).status_code == 201
+
+    body = client.get("/verify/CERT-LEGACY-1").get_json()
+    assert body["verified"] is True, body
+    assert body["holder"] == "Rahul, B.Tech CSE, 2026"
+    assert "legacy" in body["university"]
+
+
 def test_unknown_university_rejected_before_payment(client):
     client.post("/accounts", json={"account_id": "rahul@upi"})
 

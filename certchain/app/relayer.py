@@ -92,7 +92,14 @@ class Relayer:
                     failure = parsed.verification_failure()
                     if failure:
                         return {"verified": False, "cert_id": cert_id, "reason": failure}
-                    details = json.loads(parsed.data)
+                    try:
+                        details = json.loads(parsed.data)
+                        if not isinstance(details, dict) or "holder" not in details:
+                            raise ValueError("legacy format")
+                    except ValueError:
+                        # Phase 3 se pehle ke records ka data plain string tha —
+                        # backward compatibility: 500 mat do, gracefully handle karo
+                        details = {"holder": parsed.data, "course": "", "university": "(legacy record)"}
                     return {
                         "verified": True,
                         "cert_id": cert_id,

@@ -11,9 +11,11 @@ Endpoints:
   GET  /verify/<cert_id>  FREE verification — ✅/❌ + block link
 """
 
+from pathlib import Path
 from typing import Dict, Optional
 
-from flask import Flask, jsonify, request
+import requests
+from flask import Flask, jsonify, render_template, request
 
 from certchain.core.wallet import Wallet
 from .relayer import Relayer
@@ -22,6 +24,9 @@ from .upi import FakeUPIBank
 DEMO_UNIVERSITY = "Demo University"
 
 _REQUIRED_ISSUE_FIELDS = ("account_id", "university", "cert_id", "holder", "course")
+
+# Flask ko string naam dene se root_path ambiguous ho jaata hai — explicit paths rakho
+APP_DIR = Path(__file__).parent
 
 
 def create_app(node_url: str, issuer_wallets: Optional[Dict[str, Wallet]] = None,
@@ -36,7 +41,11 @@ def create_app(node_url: str, issuer_wallets: Optional[Dict[str, Wallet]] = None
     wallets = issuer_wallets or {DEMO_UNIVERSITY: Wallet.generate()}
     relayer = Relayer(node_url=node_url, bank=bank, issuer_wallets=wallets)
 
-    app = Flask("certchain-app")
+    app = Flask(
+        "certchain-app",
+        template_folder=str(APP_DIR / "templates"),
+        static_folder=str(APP_DIR / "static"),
+    )
 
     @app.post("/accounts")
     def create_account():
@@ -77,5 +86,21 @@ def create_app(node_url: str, issuer_wallets: Optional[Dict[str, Wallet]] = None
     @app.get("/verify/<cert_id>")
     def verify(cert_id):
         return jsonify(relayer.verify(cert_id))
+
+    @app.get("/")
+    def home():
+        """Web UI — 3 tabs (Issue / Verify / Explorer), 6 languages (langs.json)."""
+        langs_path = Path(__file__).parent / "static" / "langs.json"
+        langs_json = langs_path.read_text(encoding="utf-8")
+        return render_template("index.html", langs_json=langs_json)
+
+    @app.get("/api/blocks")
+    def api_blocks():
+        """Explorer ka data — node ki chain ko UI ke liye proxy karte hain."""
+        try:
+            data = requests.get(f"{relayer.node_url}/chain", timeout=5).json()
+            return jsonify({"blocks": data.get("chain", []), "length": data.get("length", 0)})
+        except (requests.RequestException, ValueError):
+            return jsonify({"error": "node se connect nahi ho paya"}), 502
 
     return app

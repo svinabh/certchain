@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CertChain</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <div>
+    <h1 data-i18n="appTitle">CertChain</h1>
+    <p class="subtitle" data-i18n="appSubtitle">Certificates on blockchain — invisible to users</p>
+  </div>
+  <div class="lang-box">
+    <label for="lang" data-i18n="langLabel">Language</label>
+    <select id="lang">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="ar">العربية</option>
+      <option value="ja">日本語</option>
+    </select>
+  </div>
+</header>
+
+<nav>
+  <button id="tab-issue" class="tab active" data-i18n="tabIssue">Issue</button>
+  <button id="tab-verify" class="tab" data-i18n="tabVerify">Verify</button>
+  <button id="tab-explorer" class="tab" data-i18n="tabExplorer">Explorer</button>
+</nav>
+
+<main>
+  <section id="page-issue" class="page active">
+    <div class="card">
+      <h2 data-i18n="issueTitle">Issue a Certificate</h2>
+      <p class="hint" data-i18n="feeInfo">Fee: ₹5 via UPI (demo) — the user never touches crypto</p>
+      <form id="issue-form">
+        <label data-i18n="accountId">UPI Account ID</label>
+        <input id="issue-account" placeholder="rahul@upi">
+        <label data-i18n="university">University</label>
+        <input id="issue-university" value="Demo University">
+        <label data-i18n="certId">Certificate ID</label>
+        <input id="issue-certid" placeholder="CERT-2026-0101">
+        <label data-i18n="holder">Holder Name</label>
+        <input id="issue-holder" placeholder="Rahul">
+        <label data-i18n="course">Course</label>
+        <input id="issue-course" placeholder="B.Tech CSE">
+        <button type="submit" class="primary" data-i18n="issueBtn">Issue Certificate (₹5)</button>
+      </form>
+      <div id="issue-result" class="result hidden"></div>
+    </div>
+  </section>
+
+  <section id="page-verify" class="page">
+    <div class="card">
+      <h2 data-i18n="verifyTitle">Verify a Certificate</h2>
+      <p class="hint" data-i18n="freeInfo">100% free — anyone can verify, no account needed</p>
+      <form id="verify-form">
+        <label data-i18n="certId">Certificate ID</label>
+        <input id="verify-input" data-i18n-ph="verifyPlaceholder" placeholder="CERT-2026-0100">
+        <button type="submit" class="primary" data-i18n="verifyBtn">Verify (Free)</button>
+      </form>
+      <div id="verify-result" class="result hidden"></div>
+    </div>
+  </section>
+
+  <section id="page-explorer" class="page">
+    <div class="card wide">
+      <h2 data-i18n="explorerTitle">Chain Explorer</h2>
+      <button id="explorer-refresh" data-i18n="refresh">Refresh</button>
+      <div id="blocks"></div>
+    </div>
+  </section>
+</main>
+
+<footer data-i18n="footer">CertChain — invisible blockchain demo</footer>
+<script>const LANGS = {{ langs_json | safe }};</script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

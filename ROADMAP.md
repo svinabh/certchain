@@ -127,7 +127,13 @@ Month 0      1-2        3-6           9-12          12-18
 - Full journey: 12-18 mahine (small team, honest estimate)
 
 ## Abhi kahan hain?
-- [ ] Phase 1  ← YAHAN SE SHURU (bol do "shuru karo")
-- [ ] Phase 2
-- [ ] Phase 3
-- [ ] ...
+- [x] Phase 1 — Blockchain Core ✅ (2026-11-17)
+- [x] Phase 2 — Wallets & Signatures ✅
+- [x] Phase 3 — P2P Network (3 nodes + consensus) ✅
+- [x] Phase 4 — Invisible Blockchain App (UPI + relayer + verify) ✅
+- [x] Phase 5 — Web UI + Explorer + 6-language i18n ✅
+- [x] Phase 6 — GitHub Actions CI + polish ✅
+
+🎉 **LEVEL 0 COMPLETE** — 34 tests green, live web UI, portfolio repo on GitHub!
+
+Next: **Level 1 → Phase 7** (framework decision + whitepaper) jab ready ho.

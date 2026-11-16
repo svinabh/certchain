@@ -1,10 +1,13 @@
 # CertChain
 
+[![CI](https://github.com/svinabh/certchain/actions/workflows/ci.yml/badge.svg)](https://github.com/svinabh/certchain/actions/workflows/ci.yml)
+
 Certificate verification on blockchain — **invisible blockchain** design
 (UPI in front, chain behind; users never touch crypto).
 
-> Phase 1: blockchain core — blocks, SHA-256 hashing, light proof-of-work,
-> chain linking and tamper detection. ~150 lines, zero dependencies.
+> Status: **Level 0 COMPLETE** ✅ — core, wallets, 3-node P2P network,
+> invisible app layer (fake UPI + relayer), web UI (6 languages), 29 unit
+> tests + 5 adversarial HTTP tests, CI on every push.
 
 ## Quickstart
 

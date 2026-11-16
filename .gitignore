@@ -22,3 +22,6 @@ satya-contracts/out/
 satya-contracts/cache/
 satya-contracts/broadcast/
 satya-contracts/.env
+
+# Orbit SDK
+orbit/node_modules/

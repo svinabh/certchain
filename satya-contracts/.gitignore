@@ -1,0 +1,6 @@
+
+# Foundry
+satya-contracts/lib/
+satya-contracts/out/
+satya-contracts/cache/
+satya-contracts/.env

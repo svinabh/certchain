@@ -7,46 +7,14 @@ unhe jodta hai, node1 pe transaction mine karta hai, aur node2/node3 ke
 resolve se sabko sync karta hai. Laptop ke 3 terminals ka zaroorat nahi!
 """
 
-import socket
-import threading
 import time
 
 import requests
-from werkzeug.serving import make_server
 
 from certchain.core.records import SignedRecord
 from certchain.core.wallet import Wallet
+from certchain.network.helpers import NodeServer, free_port, wait_up
 from certchain.network.node import create_app
-
-
-class NodeServer(threading.Thread):
-    """Ek node ko real HTTP server ki tarah chalane ka helper (apne thread me)."""
-
-    def __init__(self, port: int):
-        super().__init__(daemon=True)
-        self.port = port
-        self.server = make_server("127.0.0.1", port, create_app(port), threaded=True)
-
-    def run(self) -> None:
-        self.server.serve_forever()
-
-
-def free_port() -> int:
-    s = socket.socket()
-    s.bind(("127.0.0.1", 0))
-    port = s.getsockname()[1]
-    s.close()
-    return port
-
-
-def wait_up(url: str, tries: int = 50) -> None:
-    for _ in range(tries):
-        try:
-            requests.get(f"{url}/health", timeout=1)
-            return
-        except requests.RequestException:
-            time.sleep(0.1)
-    raise RuntimeError(f"node up nahi hua: {url}")
 
 
 def banner(text: str) -> None:
@@ -59,7 +27,7 @@ def main() -> None:
     banner("CertChain Phase 3 — 3-node P2P network (real HTTP servers)")
 
     ports = {name: free_port() for name in ("node1", "node2", "node3")}
-    servers = {name: NodeServer(port) for name, port in ports.items()}
+    servers = {name: NodeServer(create_app(port), port) for name, port in ports.items()}
     for server in servers.values():
         server.start()
     urls = {name: f"http://127.0.0.1:{port}" for name, port in ports.items()}

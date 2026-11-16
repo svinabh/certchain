@@ -73,5 +73,5 @@ adversarial/
 - [MASTERPLAN.md](MASTERPLAN.md) — 5-level ladder to mainnet
 - [FEATURES.md](FEATURES.md) — full feature menu
 - [ROADMAP.md](ROADMAP.md) — 12 phases, shuru se mainnet
-- [CHAIN-COIN-SPEC.md](CHAIN-COIN-SPEC.md) — coin: 1 crore supply
+- [CHAIN-COIN-SPEC.md](CHAIN-COIN-SPEC.md) — SATYA coin: 1 crore fixed supply
 - [DEPLOYMENT.md](DEPLOYMENT.md) — deployment guide

@@ -1,7 +1,7 @@
 # CertChain Whitepaper (v0.1 draft)
 
 **CertChain — The Invisible Blockchain**
-*Certificate verification and India-first payments, secured by Ethereum, powered by a 1-crore native coin.*
+*Certificate verification and India-first payments, secured by Ethereum, powered by **SATYA** — a 1-crore native coin whose name means "truth" in Sanskrit (सत्यमेव जयते — truth alone triumphs).*
 
 > Draft: 2026-11-17 · Phase 7 deliverable · Status: work-in-progress
 
@@ -103,7 +103,8 @@ exploit across 6 chains fails our security bar). See FRAMEWORK-DECISION.md.
 at deployment** as the chain's gas token — official Orbit feature. Users pay
 fees in the coin without knowing it; the relayer abstracts even that.
 
-**Coin.** Total supply **1 crore (10,000,000), fixed forever**: 40% staking
+**Coin — SATYA.** Sanskrit for *truth*; every verified certificate on CertChain is a
+record of it. Total supply **1 crore (10,000,000), fixed forever**: 40% staking
 emission over ~10 years, 20% community, 15% team (4-year lock), 15% early
 supporters, 10% treasury. Base-fee burn adds deflationary pressure under
 usage. Distribution and supply are genesis-immutable.

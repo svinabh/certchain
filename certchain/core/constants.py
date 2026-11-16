@@ -13,7 +13,7 @@ GENESIS_PREVIOUS_HASH = "0" * 64
 # Coin spec (CHAIN-COIN-SPEC.md) — fixed forever, code-locked
 TOTAL_SUPPLY = 10_000_000  # 1 crore — no one can mint beyond this
 
-GENESIS_MESSAGE = "GENESIS: CertChain v1 — total supply 1 crore (10,000,000)"
+GENESIS_MESSAGE = "GENESIS: CertChain — SATYA, total supply 1 crore (10,000,000)"
 
 # Genesis timestamp FIXED — har node ka genesis block EXACTLY same banega
 # (same content → same hash). Yahi cheez nodes ko sync ke laayak banati hai.

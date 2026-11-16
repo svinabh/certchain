@@ -1,12 +1,12 @@
 # CertChain — Chain & Coin Spec (FINAL)
 
-> Decided 2026-11-17: Total supply = **1 crore (10,000,000 coins)**
+> Decided 2026-11-17: Total supply = **1 crore (10,000,000 coins)** · Coin name = **SATYA ($SATYA)**
 
 ## Coin Basics
 
 | Spec | Value |
 |---|---|
-| Name / Symbol | **TBD** (tumhe decide karna hai) |
+| Name / Symbol | **SATYA ($SATYA)** — सत्य = "truth" (collision-checked 2026-11-17: koi established project nahi) |
 | Type | Native coin (gas + staking + governance) |
 | Total supply | **10,000,000 (1 crore)** — fixed, kabhi nahi badlega |
 | Decimals | 18 (ETH standard — 0.0127 jaise chhote fractions valid hain) |
@@ -72,5 +72,5 @@ Profit:        ~₹3.7 lakh/saal  → isliye log validator banna chahenge 🔥
 
 ## TODO
 
-- [ ] Coin ka naam + symbol decide karo
-- [ ] Genesis file me ye numbers config (Cosmos SDK / hamare Phase 1 code me supply constant)
+- [x] Coin ka naam + symbol: **SATYA ($SATYA)** ✅ — सत्यमेव जयते; har verified certificate = satya ka jay. Collision-check done (CoinGecko: koi established SATYA project nahi; SEAL reject hua — already taken). Trademark/domain check Level 3 pe lawyer ke saath.
+- [ ] Genesis file me ye numbers config (Phase 8: SATYA ERC-20, 1 crore fixed supply, Sepolia → Orbit CGT)

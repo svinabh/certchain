@@ -15,3 +15,10 @@ __pycache__/
 # Editors
 .idea/
 .vscode/
+
+# Foundry
+satya-contracts/lib/
+satya-contracts/out/
+satya-contracts/cache/
+satya-contracts/broadcast/
+satya-contracts/.env

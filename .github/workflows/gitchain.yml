@@ -1,0 +1,44 @@
+name: GitChain Miner
+
+# CertChain ka live pulse — har 30 min me ek block mine hota hai
+# aur chain-state.json repo me commit hota hai.
+# Manual trigger bhi hai: Actions tab → "Run workflow" (instant mining!)
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gitchain-miner
+  cancel-in-progress: false
+
+jobs:
+  mine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Mine heartbeat block
+        run: python -m certchain.gitchain
+
+      - name: Commit mined block
+        run: |
+          git config user.name "certchain-miner[bot]"
+          git config user.email "certchain-miner[bot]@users.noreply.github.com"
+          git add chain-state.json
+          git diff --cached --quiet || git commit -m "⛏️ GitChain block mined (run ${{ github.run_id }})"
+          git push

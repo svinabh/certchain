@@ -9,6 +9,17 @@ Certificate verification on blockchain — **invisible blockchain** design
 > invisible app layer (fake UPI + relayer), web UI (6 languages), 29 unit
 > tests + 5 adversarial HTTP tests, CI on every push.
 
+## 🟢 GitChain — LIVE blockchain (GitHub pe chal rahi hai!)
+
+Tumhari chain **GitHub Actions se LIVE hai** — har 30 min me naya block mine hota hai,
+laptop band ho tab bhi:
+
+- **Chain state:** [chain-state.json](chain-state.json) — saare blocks, live
+- **Miner workflow:** [Actions → GitChain Miner](https://github.com/svinabh/certchain/actions/workflows/gitchain.yml)
+  - Har 30 min auto-mine ⛏️
+  - **"Run workflow" button** se instant mining
+- Honest flag: GitHub-hosted demo chain hai (trust = GitHub); fully trustless node Orbit L2 me aayega
+
 ## Quickstart
 
 ```bash

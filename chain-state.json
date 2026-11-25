@@ -142,7 +142,18 @@
       "previous_hash": "000046ddf4dbc4bf25c551675b78551869fb0f4dd4fc828248e7868ce58e41cb",
       "nonce": 60951,
       "hash": "000026ca3eda3ec1df723557a06e1d69a0c761446a625fcb23f8b871ae385a36"
+    },
+    {
+      "version": 1,
+      "index": 13,
+      "timestamp": 1795599757.6945066,
+      "records": [
+        "CHAIN-HEARTBEAT #13 | 2026-11-25 09:42:37 UTC"
+      ],
+      "previous_hash": "000026ca3eda3ec1df723557a06e1d69a0c761446a625fcb23f8b871ae385a36",
+      "nonce": 76109,
+      "hash": "0000ce7920f9fbdbc37bf3c0ee50502d382edb586f035ca5557cbb37aed4a5d7"
     }
   ],
-  "length": 13
+  "length": 14
 }
